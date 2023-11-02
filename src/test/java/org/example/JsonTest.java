@@ -15,7 +15,7 @@ public class JsonTest {
 
         var options = Map.of(
                 "js.commonjs-require", "true",
-                "js.commonjs-require-cwd", System.getProperty("user.dir"));
+                "js.commonjs-require-cwd", "src/main");
 
         return Context.newBuilder("js")
                 .allowAllAccess(false)
