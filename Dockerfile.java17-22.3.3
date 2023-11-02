@@ -1,0 +1,21 @@
+FROM ubuntu:20.04
+ARG GRAALVM_VERSION="ce-java17-22.3.3"
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends curl less locales tzdata maven wget
+
+# Install GraalVM
+RUN curl -sL https://get.graalvm.org/jdk | bash -s -- --components js --to /usr/local graalvm-${GRAALVM_VERSION}
+ENV GRAALVM_HOME="/usr/local/graalvm-${GRAALVM_VERSION}"
+ENV PATH="${GRAALVM_HOME}/bin:$PATH"
+ENV JAVA_HOME=${GRAALVM_HOME}
+
+ARG USERID="1000"
+ARG USERNAME="test"
+ARG USERHOME="/home/test"
+
+RUN adduser --disabled-password --gecos "" --uid $USERID $USERNAME --home $USERHOME
+RUN usermod $USERNAME -a -G sudo
+RUN echo "$USERNAME     ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
+USER $USERNAME

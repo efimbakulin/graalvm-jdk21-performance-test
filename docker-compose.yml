@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  .graalvm-example:
+    hostname: graalvm-example
+    build:
+      context: .
+      args:
+        USERID: ${UID:-1001}
+        USERNAME: ${USER:-test}
+        USERHOME: ${HOME}
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - $PWD:$PWD
+      - .:/workspace
+    working_dir: $PWD
+
+  graalvm-example-22:
+    extends:
+      service: .graalvm-example
+    build:
+      dockerfile: Dockerfile.java17-22.3.3
+
+  graalvm-example-23:
+    extends:
+      service: .graalvm-example
+    build:
+      dockerfile: Dockerfile.jdk-21.0.0
