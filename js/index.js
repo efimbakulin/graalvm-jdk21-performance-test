@@ -6,7 +6,7 @@ for (let i = 0; i < OBJECT_SIZE; i++) {
     obj["str_key" + i] = '#'.repeat(50);
 };
 
-function jsonParseStringify(){
+function jsonParseStringify() {
     return JSON.parse(JSON.stringify(obj));
 };
 
