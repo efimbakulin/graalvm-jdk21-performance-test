@@ -3,21 +3,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>graalvm</groupId>
-  <artifactId>example</artifactId>
+  <groupId>org.example</groupId>
+  <artifactId>graalvm-performance-test</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>GraalVM example</name>
-
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <graalvm.version>23.1.0</graalvm.version>
-    <maven.assembly.version>3.6.0</maven.assembly.version>
-    <maven.compiler.version>3.11.0</maven.compiler.version>
     <maven.compiler.release>21</maven.compiler.release>
   </properties>
 
   <dependencies>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version>
+    </dependency>
+    <!-- Comment this out for graalvm ce-java17-22.3.3 -->
     <dependency>
       <groupId>org.graalvm.polyglot</groupId>
       <artifactId>js-community</artifactId>
@@ -25,47 +28,11 @@
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
+    <!-- Comment this out for graalvm ce-java17-22.3.3 -->
     <dependency>
       <groupId>org.graalvm.polyglot</groupId>
       <artifactId>polyglot</artifactId>
       <version>${graalvm.version}</version>
     </dependency>
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13.2</version>
-    </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>${maven.assembly.version}</version>
-          <configuration>
-              <descriptorRefs>
-                  <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <attach>false</attach>
-              <archive>
-                  <manifest>
-                      <mainClass>example.HelloPolyglot</mainClass>
-                      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                  </manifest>
-              </archive>
-          </configuration>
-          <executions>
-              <execution>
-                  <id>make-assembly</id>
-                  <phase>package</phase>
-                  <goals>
-                      <goal>single</goal>
-                  </goals>
-              </execution>
-          </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>
