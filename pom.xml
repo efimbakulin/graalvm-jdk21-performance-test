@@ -10,17 +10,35 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <graalvm.version>23.1.0</graalvm.version>
-    <maven.compiler.release>21</maven.compiler.release>
+    <graalvm.version>22.3.3</graalvm.version>
+    <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
   <dependencies>
+    <!-- GraalVM java17-22.3.3 dependencies -->
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.13.2</version>
     </dependency>
-    <!-- Comment this out for graalvm ce-java17-22.3.3 -->
+    <dependency>
+        <groupId>org.graalvm.sdk</groupId>
+        <artifactId>graal-sdk</artifactId>
+        <version>${graalvm.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.graalvm.js</groupId>
+        <artifactId>js</artifactId>
+        <version>${graalvm.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+    <!-- GraalVM jdk-21.0.0 dependencies -->
+    <!--
+    <dependency>
+      <groupId>org.graalvm.polyglot</groupId>
+      <artifactId>polyglot</artifactId>
+      <version>${graalvm.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.graalvm.polyglot</groupId>
       <artifactId>js-community</artifactId>
@@ -28,11 +46,6 @@
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
-    <!-- Comment this out for graalvm ce-java17-22.3.3 -->
-    <dependency>
-      <groupId>org.graalvm.polyglot</groupId>
-      <artifactId>polyglot</artifactId>
-      <version>${graalvm.version}</version>
-    </dependency>
+    -->
   </dependencies>
 </project>
