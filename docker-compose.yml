@@ -2,10 +2,8 @@ version: '3.1'
 
 services:
   .graalvm-example:
-    hostname: graalvm-example
     build:
       context: .
-    command: /bin/sh -c "while sleep 1000; do :; done"
     volumes:
       - $PWD:$PWD
     working_dir: $PWD
@@ -13,9 +11,13 @@ services:
   graalvm-example-22.3.3:
     extends:
       service: .graalvm-example
-    image: ghcr.io/graalvm/graalvm-ce:ol7-java17-22.3.3
+    build:
+      context: .
+      dockerfile: Dockerfile.22.3.3
+    command: ./mvnw clean test -f pom.22.xml
 
   graalvm-example-jdk21:
     extends:
       service: .graalvm-example
     image: ghcr.io/graalvm/jdk-community:21
+    command: ./mvnw clean test -f pom.jdk21.xml
